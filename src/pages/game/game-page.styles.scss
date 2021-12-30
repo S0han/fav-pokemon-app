@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .search-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 10px;
+
+        .search-box {
+            margin: 10px;
+        }
+
+        .search-button {
+            margin: 10px;
+        }
+    }
+
+    .dispaly-data {
+        margin: 10px;
+    }
+}
+
+
+
