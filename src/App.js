@@ -9,17 +9,35 @@ import AboutPage from './pages/about/about.component';
 import SignInPage from './pages/signin/sign-in-and-sign-up.component';
 import GamePage from './pages/game/game-page.component';
 
+import { auth } from './firebase/firebase.utils';
+
 class App extends React.Component {
   constructor() {
     super();
 
-    this.state = null;
+    this.state = {
+      currentUser: null
+    }
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
+      this.setState({ currentUser: user });
+
+      console.log(user);
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
   }
 
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header currentUser={this.state.currentUser} />
         <Routes>
           <Route exact path='/' element={<HomePage />} />
           <Route path='/about' element={<AboutPage />} />

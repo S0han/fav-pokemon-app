@@ -5,6 +5,8 @@ import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import FormButton from '../form-button/form-button.component';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 
 
 const SignIn = () => {
@@ -41,7 +43,8 @@ const SignIn = () => {
                     handleChange={handleChange}
                     required
                 />
-                <FormButton type='submit'> Sign In </FormButton>
+                <FormButton type='submit'> SIGN IN </FormButton>
+                <FormButton onClick={signInWithGoogle}> {' '}SIGN IN WITH GOOGLE{' '} </FormButton>
             </form>
         </div>
     );
