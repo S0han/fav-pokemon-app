@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
 
-import './sign-in.styles.scss';
-
 import FormInput from '../form-input/form-input.component';
 import FormButton from '../form-button/form-button.component';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
+import './sign-up.styles.scss';
 
+const SignUp = () => {
 
-const SignIn = () => {
-
-    const [infoData, setInfoData] = useState({email:'', password:''});
+    const [infoData, setInfoData] = useState({email:'', password:'', confirmPassword:''});
 
     const handleChange = event => {
-        setInfoData({...infoData, [event.target.name]: event.target.value });
+        setInfoData({...infoData, [event.target.name]: event.target.value});
+        console.log(infoData);
     }
 
     const handleSubmit = event => {
@@ -24,7 +23,7 @@ const SignIn = () => {
         */
     }
 
-    return(
+    return (
         <div>
             <form onSubmit={handleSubmit}>
                 <FormInput 
@@ -43,11 +42,18 @@ const SignIn = () => {
                     handleChange={handleChange}
                     required
                 />
-                <FormButton type='submit'> SIGN IN </FormButton>
-                <FormButton onClick={signInWithGoogle}> {' '}SIGN IN WITH GOOGLE{' '} </FormButton>
+                <FormInput 
+                    name='confirmPassword'
+                    type='password'
+                    label='confirm password'
+                    value={infoData.confirmPassword}
+                    handleChange={handleChange}
+                    required
+                />
+                <FormButton type='submit'> SUBMIT </FormButton>
             </form>
         </div>
     );
 }
 
-export default SignIn;
+export default SignUp;
