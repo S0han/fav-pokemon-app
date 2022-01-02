@@ -45,14 +45,14 @@ class App extends React.Component {
     this.unsubscribeFromAuth();
   }
 
-  render() {
+  render() { 
     return (
       <div className="App">
         <Header currentUser={this.state.currentUser} />
         <Routes>
           <Route exact path='/' element={<HomePage />} />
           <Route path='/about' element={<AboutPage />} />
-          <Route path='/signin' element={<SignInPage />} />
+          <Route path='/signin' element={(this.state.currentUser === null) ? <SignInPage /> : <GamePage />} />
           <Route path='/game' element={<GamePage />} />
         </Routes>
       </div>
