@@ -9,23 +9,49 @@ import './sign-up.styles.scss';
 
 const SignUp = () => {
 
-    const [infoData, setInfoData] = useState({email:'', password:'', confirmPassword:''});
+    const [infoData, setInfoData] = useState({email:'', password:'', confirmPassword:'', displayName:''});
 
     const handleChange = event => {
         setInfoData({...infoData, [event.target.name]: event.target.value});
-        console.log(infoData);
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        /*
-            CONTINUE WORKING HERE AND CONNECT TO FIREBASE
-        */
+        
+        const { displayName, email, password, confirmPassword } = infoData;
+
+        if (password !== confirmPassword) {
+            alert("passwords don't match");
+            return;
+        }
+
+        try {
+            const { user } = await auth.createUserWithEmailAndPassword(email, password);
+
+            await createUserProfileDocument(user);
+
+            setInfoData({
+                displayName:'',
+                email:'',
+                password:'',
+                confirmPassword:''
+            });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <FormInput 
+                    name='displayName'
+                    type='text'
+                    label='displayName'
+                    value={infoData.displayName}
+                    handleChange={handleChange}
+                    required
+                />
                 <FormInput 
                     name='email'
                     type='email'
