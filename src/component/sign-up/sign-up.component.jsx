@@ -28,7 +28,7 @@ const SignUp = () => {
         try {
             const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-            await createUserProfileDocument(user);
+            await createUserProfileDocument(user, { displayName });
 
             setInfoData({
                 displayName:'',
@@ -47,7 +47,7 @@ const SignUp = () => {
                 <FormInput 
                     name='displayName'
                     type='text'
-                    label='displayName'
+                    label='display name'
                     value={infoData.displayName}
                     handleChange={handleChange}
                     required

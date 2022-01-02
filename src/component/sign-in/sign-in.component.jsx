@@ -5,7 +5,7 @@ import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import FormButton from '../form-button/form-button.component';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 
 
@@ -17,11 +17,21 @@ const SignIn = () => {
         setInfoData({...infoData, [event.target.name]: event.target.value });
     }
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        /*
-            CONTINUE WORKING HERE AND CONNECT TO FIREBASE
-        */
+        
+        const { email, password } = infoData;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+
+            setInfoData({
+                email:'',
+                password:''
+            })
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     return(
