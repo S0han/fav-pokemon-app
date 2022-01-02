@@ -22,11 +22,6 @@ const GamePage = () => {
         const [togglePokeData, setTogglePokeData] = useState('');
 
         const getPokemon = async () => {
-            const togglePokeData = true;
-            const toggleSavePokeData = false;
-            setTogglePokeData(togglePokeData);
-            setToggleSavePokeData(toggleSavePokeData);
-
             try {
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchField}`);
                 const jsonResponse = await response.json();
@@ -39,7 +34,13 @@ const GamePage = () => {
                 setPokeData(pokeData);
             } catch (e) {
                 alert('Pokemon does not exist! Try again.');
+                return;
             }
+            
+            const togglePokeData = true;
+            const toggleSavePokeData = false;
+            setTogglePokeData(togglePokeData);
+            setToggleSavePokeData(toggleSavePokeData);
         }
 
         const [toggleSavePokeData, setToggleSavePokeData] = useState('');
