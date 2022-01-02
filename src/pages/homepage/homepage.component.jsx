@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './homepage.styles.scss';
 
-import CustomButton from '../../component/button/button.component';
+import CustomButton from '../../component/search-button/button.component';
 
 const HomePage = () => (
     <div className='home-page'>
