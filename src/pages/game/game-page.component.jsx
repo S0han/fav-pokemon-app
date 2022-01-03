@@ -8,6 +8,8 @@ import CardData from '../../component/card-data/card-data.component';
 import SaveButton from '../../component/save-button/save-button.component';
 import DeleteButton from '../../component/delete-button/delete-button.component';
 
+import { firestore, auth } from '../../firebase/firebase.utils';
+
 
 const GamePage = () => {
         const [searchField, setSearchField] = useState('');
@@ -27,8 +29,8 @@ const GamePage = () => {
                 const jsonResponse = await response.json();
                 const pokeData = {
                     name: jsonResponse.name, 
-                    id: jsonResponse.id, sprites: 
-                    jsonResponse.sprites.front_default
+                    id: jsonResponse.id, 
+                    sprites: jsonResponse.sprites.front_default
                 };
 
                 setPokeData(pokeData);
@@ -52,23 +54,37 @@ const GamePage = () => {
             -Integrate these functions with firebase
         */
 
-        const storePokemon = () => {
+        const storePokemon = async () => {
             const toggleSearchPokeData = true;
             const togglePokeData = false;
             const toggleSavePokeData = true;
             setToggleSearchPokeData(toggleSearchPokeData);
             setTogglePokeData(togglePokeData);
             setToggleSavePokeData(toggleSavePokeData);
+
+            try {
+                await firestore.collection(`users/${auth.currentUser.uid}/savedPokeData`).add({
+                    name: pokeData.name,
+                    id: pokeData.id,
+                    sprites: pokeData.sprites
+                });
+            } catch (error) {
+                console.error(error);
+            }
         }
 
-        const deletePokemon = () => {
+        const deletePokemon = async () => {
             const toggleSearchPokeData = false;
             const toggleSavePokeData = false;
             setToggleSearchPokeData(toggleSearchPokeData);
             setToggleSavePokeData(toggleSavePokeData);
+
+            try {
+               //await firestore.collection(`users/${auth.currentUser.uid}/savedPokeData`).delete();
+            } catch (error) {
+                console.error(error);
+            }
         }
-
-
 
         return (
             <div className='container'>
