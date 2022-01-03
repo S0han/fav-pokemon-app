@@ -80,7 +80,13 @@ const GamePage = () => {
             setToggleSavePokeData(toggleSavePokeData);
 
             try {
-               //await firestore.collection(`users/${auth.currentUser.uid}/savedPokeData`).delete();
+                firestore.collection(`users/${auth.currentUser.uid}/savedPokeData`) 
+                .get()
+                .then((res) => {
+                  res.forEach((element) => {
+                    element.ref.delete();
+                  });
+                });
             } catch (error) {
                 console.error(error);
             }
