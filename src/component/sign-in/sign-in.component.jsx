@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './sign-in.styles.scss';
 
@@ -7,9 +8,8 @@ import FormButton from '../form-button/form-button.component';
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
-
-
 const SignIn = () => {
+    const navigate = useNavigate();
 
     const [infoData, setInfoData] = useState({email:'', password:''});
 
@@ -32,6 +32,7 @@ const SignIn = () => {
         } catch (error) {
             console.error(error);
         }
+        navigate('/game', {replace: true});
     }
 
     return(
@@ -54,7 +55,7 @@ const SignIn = () => {
                     required
                 />
                 <FormButton type='submit'> SIGN IN </FormButton>
-                <FormButton onClick={signInWithGoogle}> {' '}SIGN IN WITH GOOGLE{' '} </FormButton>
+                <FormButton type='submit' onClick={signInWithGoogle} > {' '}SIGN IN WITH GOOGLE{' '} </FormButton>
             </form>
         </div>
     );

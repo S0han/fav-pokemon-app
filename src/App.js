@@ -52,7 +52,7 @@ class App extends React.Component {
         <Routes>
           <Route exact path='/' element={<HomePage />} />
           <Route path='/about' element={<AboutPage />} />
-          <Route path='/signin' element={(this.state.currentUser === null) ? <SignInPage /> : <GamePage />} />
+          <Route path='/signin' element={(this.state.currentUser == null) ? <SignInPage /> : <GamePage />} />
           <Route path='/game' element={<GamePage />} />
         </Routes>
       </div>

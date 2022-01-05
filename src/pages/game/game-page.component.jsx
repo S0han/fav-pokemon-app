@@ -12,6 +12,29 @@ import { firestore, auth } from '../../firebase/firebase.utils';
 
 
 const GamePage = () => {
+    const [savedData, setSavedData] = useState('');
+    const [savedPokemonData, setSavedPokemonData] = useState('');
+
+    const savedPokemon = async () => {
+        const pokemon = await firestore.doc(`savedPokeData/${auth.currentUser.uid}`).get();
+        try {
+            if (pokemon.exists) {
+                const savedData = 1;
+                setSavedData(savedData);
+    
+                const savedPokemonData = pokemon.data();
+                setSavedPokemonData(savedPokemonData);
+            } else {
+                const savedData = 0;
+                setSavedData(savedData);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    savedPokemon();
+
         const [searchField, setSearchField] = useState('');
         const [toggleSearchPokeData, setToggleSearchPokeData] = useState('');
 
@@ -24,6 +47,7 @@ const GamePage = () => {
         const [togglePokeData, setTogglePokeData] = useState('');
 
         const getPokemon = async () => {
+
             try {
                 const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchField}`);
                 const jsonResponse = await response.json();
@@ -47,13 +71,6 @@ const GamePage = () => {
 
         const [toggleSavePokeData, setToggleSavePokeData] = useState('');
 
-        /*
-            CONTINUE HERE!!!
-
-            -The 2 functions below store and delete the user data
-            -Integrate these functions with firebase
-        */
-
         const storePokemon = async () => {
             const toggleSearchPokeData = true;
             const togglePokeData = false;
@@ -63,7 +80,7 @@ const GamePage = () => {
             setToggleSavePokeData(toggleSavePokeData);
 
             try {
-                await firestore.collection(`users/${auth.currentUser.uid}/savedPokeData`).add({
+                await firestore.doc(`savedPokeData/${auth.currentUser.uid}`).set({
                     name: pokeData.name,
                     id: pokeData.id,
                     sprites: pokeData.sprites
@@ -80,13 +97,7 @@ const GamePage = () => {
             setToggleSavePokeData(toggleSavePokeData);
 
             try {
-                firestore.collection(`users/${auth.currentUser.uid}/savedPokeData`) 
-                .get()
-                .then((res) => {
-                  res.forEach((element) => {
-                    element.ref.delete();
-                  });
-                });
+                firestore.doc(`savedPokeData/${auth.currentUser.uid}`).delete();
             } catch (error) {
                 console.error(error);
             }
@@ -114,8 +125,8 @@ const GamePage = () => {
                 </div>
                 <div>
                     {
-                        (toggleSavePokeData) ? (<div className='saved-pokemon'>
-                            <CardData pokeData={pokeData} />
+                        (toggleSavePokeData || savedData) ? (<div className='saved-pokemon'>
+                            <CardData pokeData={savedPokemonData || pokeData} />
                             <DeleteButton deletePokemon={deletePokemon}>DELETE</DeleteButton>
                         </div>) : null
                     }
@@ -123,6 +134,5 @@ const GamePage = () => {
             </div>
         );
 }
-
 
 export default GamePage;
