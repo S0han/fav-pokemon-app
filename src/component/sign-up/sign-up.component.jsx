@@ -43,6 +43,7 @@ const SignUp = () => {
 
     return (
         <div>
+            <h1>SIGN UP</h1>
             <form onSubmit={handleSubmit}>
                 <FormInput 
                     name='displayName'
@@ -77,7 +78,7 @@ const SignUp = () => {
                     required
                 />
                 <div className='btn'>
-                    <FormButton type='submit'> SUBMIT </FormButton>
+                    <FormButton type='submit'> SIGN UP </FormButton>
                 </div>
             </form>
         </div>
