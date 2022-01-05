@@ -3,7 +3,7 @@ import React from 'react';
 import './delete-button.styles.scss';
 
 const DeleteButton = ({children, deletePokemon}) => (
-    <button onClick={deletePokemon}>
+    <button className='dButton' onClick={deletePokemon}>
         {children}
     </button>
 );

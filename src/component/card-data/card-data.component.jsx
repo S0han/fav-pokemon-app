@@ -5,9 +5,9 @@ import './card-data.styles.scss';
 const CardData = ({ pokeData }) => (
     <div className='card-container'>
         {
-            <div key={pokeData.id}>
+            <div className='cards' key={pokeData.id}>
                 <img src={pokeData.sprites} />
-                <p>{pokeData.name}</p>
+                <h2>{pokeData.name}</h2>
             </div>
         }
     </div>

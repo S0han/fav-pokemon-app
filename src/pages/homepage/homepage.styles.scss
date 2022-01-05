@@ -1,4 +1,13 @@
 .home-page {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 30px;
+}
+
+img {
+    padding-bottom: 30px;
+    height: 100%;
+    width: 500px
 }

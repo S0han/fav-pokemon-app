@@ -1,0 +1,17 @@
+.form-input {
+    margin: 10px;
+    border-top: black;
+    border-left: black;
+    border-right: black;
+    
+    &:focus {
+        background-color: lightgrey;
+    }
+}
+
+label {
+    text-transform: uppercase;
+    display: inline-block;
+    width: 175px;
+    text-align: right;
+}

@@ -117,18 +117,22 @@ const GamePage = () => {
                 </div>      
                 <div>
                     {
-                        (togglePokeData) ? (<div className='display-data'>
-                            <CardData pokeData={pokeData} />
-                            <SaveButton storePokemon={storePokemon}>SAVE</SaveButton>
-                        </div>) : null
+                        (togglePokeData) ? (
+                            <div className='display-data'>
+                                <CardData pokeData={pokeData} />
+                                <SaveButton className='save-button' storePokemon={storePokemon}>SAVE</SaveButton>
+                            </div>
+                        ) : null
                     }
                 </div>
                 <div>
                     {
-                        (toggleSavePokeData || savedData) ? (<div className='saved-pokemon'>
-                            <CardData pokeData={savedPokemonData || pokeData} />
-                            <DeleteButton deletePokemon={deletePokemon}>DELETE</DeleteButton>
-                        </div>) : null
+                        (toggleSavePokeData || savedData) ? (
+                            <div className='saved-pokemon'>
+                                <CardData pokeData={savedPokemonData || pokeData} />
+                                <DeleteButton deletePokemon={deletePokemon}>DELETE</DeleteButton>
+                            </div>
+                        ) : null
                     }
                 </div>
             </div>

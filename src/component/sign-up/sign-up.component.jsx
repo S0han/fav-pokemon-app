@@ -76,7 +76,9 @@ const SignUp = () => {
                     handleChange={handleChange}
                     required
                 />
-                <FormButton type='submit'> SUBMIT </FormButton>
+                <div className='btn'>
+                    <FormButton type='submit'> SUBMIT </FormButton>
+                </div>
             </form>
         </div>
     );

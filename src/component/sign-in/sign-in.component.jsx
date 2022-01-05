@@ -54,8 +54,10 @@ const SignIn = () => {
                     handleChange={handleChange}
                     required
                 />
-                <FormButton type='submit'> SIGN IN </FormButton>
-                <FormButton type='submit' onClick={signInWithGoogle} > {' '}SIGN IN WITH GOOGLE{' '} </FormButton>
+                <div className='btns'>
+                    <FormButton id='btn1' type='submit'> SIGN IN </FormButton>
+                    <FormButton id='btn2' type='submit' onClick={signInWithGoogle} > {' '}SIGN IN WITH GOOGLE{' '} </FormButton>
+                </div>
             </form>
         </div>
     );
